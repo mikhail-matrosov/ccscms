@@ -1,15 +1,17 @@
+<!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>Объединенный клинический показатель РС</title>
 	<style>
 	input {font-size: 18pt; width: 60pt;}
 	</style>
 </head>
 <body>
-
-<div style="max-width: 350pt; margin: auto">
+<link rel="stylesheet" type="text/css" href="md.css" id="_theme"></script>
+<div id="_html" class="markdown-body">
 	<h1>Калькулятор Объединенного клинического показателя рассеянного склероза</h1>
-	<hr><br>
+	<hr>
 	<div style="font-size: 18pt">
 		<input id="age" type="number" value="40"/> Возраст, лет<br>
 		<input id="ft" type="number" value="8"/> 25 FT, сек<br>
@@ -17,7 +19,10 @@
 		<input id="fptnd" type="number" value="26"/> 9 HPT ND, сек<br>
 		<input id="sdmt" type="number" value="49"/> SDMT, правильных ответов<br>
 		<br>
-		ОКП РС: <b id="result" style="font-size: 36">0</b>
+		ОКП РС: <b id="result" style="font-size: 24pt">0</b>
+		<br>
+		Без поправки на возраст:
+		<b id="resultnoage" style="font-size: 24pt">0</b>
 		<br><br>
 		<a href="Объединенный клинический показатель.docx">Подробнее о показателе</a>
 	</div>
@@ -33,6 +38,15 @@ function calc(event) {
 			+0.102 * Number(fptnd.value)
 			-0.075 * Number(sdmt.value)
 			-7.328
+		) * 100
+	) / 100
+	resultnoage.innerHTML = Math.round(
+		(
+			+0.168 * Number(ft.value)
+			+0.153 * Number(fptd.value)
+			+0.102 * Number(fptnd.value)
+			-0.075 * Number(sdmt.value)
+			-3.935
 		) * 100
 	) / 100
 }
