@@ -13,45 +13,38 @@
 	<h1>Калькулятор Объединенного клинического показателя рассеянного склероза</h1>
 	<hr>
 	<div style="font-size: 18pt">
-		<input id="age" type="number" value="40"/> Возраст, лет<br>
 		<input id="ft" type="number" value="8"/> 25 FT, сек<br>
 		<input id="fptd" type="number" value="22"/> 9 HPT D, сек<br>
 		<input id="fptnd" type="number" value="26"/> 9 HPT ND, сек<br>
 		<input id="sdmt" type="number" value="49"/> SDMT, правильных ответов<br>
 		<br>
-		ОКП РС: <b id="result" style="font-size: 24pt">0</b>
+		ОКП РС: <b><label id="result" style="font-size: 24pt">0</label></b>
 		<br>
-		Без поправки на возраст:
-		<b id="resultnoage" style="font-size: 24pt">0</b>
+		<label id="comment">Более вероятно</label>
 		<br><br>
-		<a href="Объединенный клинический показатель.docx">Подробнее о показателе</a>
+		<a href="Объединенный_клинический_показатель_без_возраста.docx">Подробнее о показателе</a>
 	</div>
 </div>
 
 <script type="text/javascript">
 function calc(event) {
-	result.innerHTML = Math.round(
-		(
-			+0.082 * Number(age.value)
-			+0.168 * Number(ft.value)
-			+0.153 * Number(fptd.value)
-			+0.102 * Number(fptnd.value)
-			-0.075 * Number(sdmt.value)
-			-7.328
-		) * 100
-	) / 100
-	resultnoage.innerHTML = Math.round(
+	res = Math.round(
 		(
 			+0.168 * Number(ft.value)
 			+0.153 * Number(fptd.value)
 			+0.102 * Number(fptnd.value)
 			-0.075 * Number(sdmt.value)
-			-3.935
+			-3.049
 		) * 100
 	) / 100
+	result.innerHTML = res
+	if (res > 0) {
+		comment.innerHTML = 'Более вероятно, у пациента <b>ремиттирующее</b> течение РС'
+	} else {
+		comment.innerHTML = 'Более вероятно, у пациента <b>прогрессирующее</b> течение РС'
+	}
 }
 
-age.addEventListener("input", calc)
 ft.addEventListener("input", calc)
 fptd.addEventListener("input", calc)
 fptnd.addEventListener("input", calc)

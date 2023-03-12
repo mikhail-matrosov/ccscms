@@ -138,8 +138,8 @@ html, body {
 	line-height: 1.5;
 	word-wrap: break-word
 
-	min-width: 838px;
-	max-width: 838px;
+	min-width: 550px;
+	max-width: 550px;
 	background-color: rgb(255, 255, 255);
 	overflow: auto;
 	border-width: 1px;
